@@ -56,17 +56,11 @@ bool Game::init()
   controls_text.setFillColor(sf::Color(250, 0, 0, 255));
   controls_text.setPosition(10,125);
 
-  Shoot_text.setString("Shoot- Left mouse on bird to draw back and space to shoot");
+  Shoot_text.setString("Shoot- Left mouse click on bird to draw back and release to shoot");
   Shoot_text.setFont(font);
   Shoot_text.setCharacterSize(25);
   Shoot_text.setFillColor(sf::Color(255, 0, 0, 128));
   Shoot_text.setPosition(10,250);
-
-  Draw_text.setString("Draw- Right mouse on bird to draw up and middle mouse to stop");
-  Draw_text.setFont(font);
-  Draw_text.setCharacterSize(25);
-  Draw_text.setFillColor(sf::Color(255, 0, 0, 128));
-  Draw_text.setPosition(10,275);
 
   escape_text.setString("Press Q to quit at any time and H to pause");
   escape_text.setFont(font);
@@ -151,16 +145,27 @@ bool Game::init()
   player.setSpeed(250);
   player.setPlayerDirection(Vector2{0,0});
 
-  // Enemy details-This is where the enemy array is set up
+  // Enemy details-This is where the enemy array is set up. This includes the stands and actual enemies
   for (int i = 0; i < no_of_enemies; i++)
   {
     enemy[1].initialiseSprite(enemy_texture,"Data/Images/kenney_animalpackredux/PNG/Round/bear.png");
     enemy[2].initialiseSprite(enemy_texture,"Data/Images/kenney_animalpackredux/PNG/Round/cow.png");
     enemy[3].initialiseSprite(enemy_texture,"Data/Images/kenney_animalpackredux/PNG/Round/dog.png");
-    enemy[1].getSprite()->setPosition(450,700);
-    enemy[2].getSprite()->setPosition(600,650);
-    enemy[3].getSprite()->setPosition(750,600);
+    enemy[1].getSprite()->setPosition(450,600);
+    enemy[2].getSprite()->setPosition(600,620);
+    enemy[3].getSprite()->setPosition(750,550);
     enemy[i].getSprite()->setScale(0.2,0.2);
+  }
+
+  for (int i = 0; i < no_of_enemies_stands; i++)
+  {
+    enemy_stand[1].initialiseSprite(enemy_stand__texture,"Data/Images/kenney_physicspack/PNG/wood elements/elementWood021.png");
+    enemy_stand[2].initialiseSprite(enemy_stand__texture,"Data/Images/kenney_physicspack/PNG/wood elements/elementWood021.png");
+    enemy_stand[3].initialiseSprite(enemy_stand__texture,"Data/Images/kenney_physicspack/PNG/wood elements/elementWood021.png");
+    enemy_stand[1].getSprite()->setPosition(455,625);
+    enemy_stand[2].getSprite()->setPosition(605,645);
+    enemy_stand[3].getSprite()->setPosition(755,575);
+    enemy_stand[i].getSprite()->setScale(0.2,0.2);
   }
 
   // Audio in the game. This includes the general game audio and the alien death sound effect
@@ -247,7 +252,6 @@ void Game::render()
     window.draw(escape_text);
     window.draw(controls_text);
     window.draw(Shoot_text);
-    window.draw(Draw_text);
     window.draw(rules);
     window.draw(bird_information);
     window.draw(alien_information);
@@ -268,6 +272,13 @@ void Game::render()
       if (enemy[i].isVisible())
       {
         window.draw(*enemy[i].getSprite());
+      }
+    }
+    for (int i = 0; i < no_of_enemies_stands; i++)
+    {
+      if (enemy_stand[i].isVisible())
+      {
+        window.draw(*enemy_stand[i].getSprite());
       }
     }
   }
@@ -367,6 +378,16 @@ bool Game::collision(const sf::Sprite& sprite1, sf::Sprite sprite2)
 // This is where any mouse pressed movement will happen
 void Game::mouseButtonPressed(sf::Event event)
 // When the mouse button is pressed. An event will happen
+{
+
+}
+
+void Game::mouseButtonReleased(sf::Event event)
+{
+
+}
+
+void Game::mouseMoved(sf::Event event)
 {
 
 }

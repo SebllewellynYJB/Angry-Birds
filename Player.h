@@ -15,15 +15,17 @@ class Player : public GameObject
   const Vector2& getPlayerDirection() const;
   void setPlayerDirection(const Vector2& playerDirection);
   void move(sf::RenderWindow& window, float dt, sf::Event event);
+  void handleInput(sf::RenderWindow&window, sf::Event event);
   int getSpeed() const;
   void setSpeed(int speed);
 
   // Player direction for key movement
   Vector2 player_direction = {0,0};
+  bool isDragging = false;
+  sf::Vector2f offset;
 
  private:
   void keyPressed(sf::RenderWindow& window, sf::Event event, float dt);
-  void mouseButtonPressed(sf::RenderWindow& window, sf::Event event);
   bool init(sf::RenderWindow& renderWindow);
 
   int speed = 0;

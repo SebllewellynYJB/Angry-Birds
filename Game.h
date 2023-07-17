@@ -21,6 +21,8 @@ class Game
   void keyReleased(sf::Event event);
   bool collision(const sf::Sprite& sprite1 , sf::Sprite sprite2);
   void mouseButtonPressed(sf::Event event);
+  void mouseButtonReleased(sf::Event event);
+  void mouseMoved(sf::Event event);
 
   // Game States
   enum class GameStates
@@ -40,6 +42,10 @@ class Game
   Enemy enemy[5];
   sf::Texture enemy_texture;
   int no_of_enemies = 5;
+
+  Enemy enemy_stand[5];
+  sf::Texture enemy_stand__texture;
+  int no_of_enemies_stands = 5;
 
  private:
   sf::RenderWindow& window;
