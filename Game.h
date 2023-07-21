@@ -27,7 +27,6 @@ class Game
   // Game States
   enum class GameStates
   {
-    Menu,
     Play,
     Pause,
     GameOver,
@@ -56,11 +55,10 @@ class Game
   sf::Text escape_text;
   sf::Text play_option;
   sf::Text quit_option;
+  bool in_menu;
   bool play_selected = true;
   sf:: Text AngryBirds_text;
   sf::Text controls_text;
-  sf::Text Draw_text;
-  sf::Text Draw_text2;
   sf::Text Shoot_text;
   sf::Text bird_information;
   sf::Text alien_information;

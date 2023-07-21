@@ -20,6 +20,7 @@ Game::~Game()
 // The speed and direction of the player character are also set here
 bool Game::init()
 {
+  in_menu = true;
   // Menu - this is where the text is set for the menu
   if (!font.loadFromFile("Data/Fonts/OpenSans-Bold.ttf"))
   {
@@ -243,7 +244,7 @@ void Game::update(float dt, sf::Event event)
 void Game::render()
 {
   // Text and textures that are rendered for the menu screen
-  if (currentState == GameStates::Menu)
+  if (in_menu)
   {
     window.draw(play_option);
     window.draw(quit_option);
@@ -326,6 +327,7 @@ void Game::keyPressed(sf::Event event, float dt)
     if (play_selected)
     {
       currentState = GameStates::Play;
+      in_menu = false;
     }
     else
     {
@@ -336,7 +338,7 @@ void Game::keyPressed(sf::Event event, float dt)
   // Key input to take player back to the menu
   if (event.key.code == sf::Keyboard::J)
   {
-    currentState = GameStates::Menu;
+    in_menu = true;
   }
   // Key input to pause the game
   if (event.key.code == sf::Keyboard::H)
@@ -383,11 +385,13 @@ void Game::mouseButtonPressed(sf::Event event)
 }
 
 void Game::mouseButtonReleased(sf::Event event)
+// When the mouse button is released. An event will happen
 {
 
 }
 
 void Game::mouseMoved(sf::Event event)
+// When the mouse button is moved. An event will happen
 {
 
 }
